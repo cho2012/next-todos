@@ -1,8 +1,11 @@
 {
   "name": "lear_next.js",
+  "homepage": "https://cho2012.github.io/next-todos/",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -10,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "gh-pages": "^6.1.1",
     "json-server": "^1.0.0-beta.0",
     "next": "14.2.3",
     "react": "^18",

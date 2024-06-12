@@ -5,7 +5,7 @@ import { FaDeleteLeft } from "react-icons/fa6";
 // import Destructuring from "./destructyring/page";
 
 type TodoType = {
-  id: number;
+  id: string;
   todo: string;
   done: boolean;
   size?: number;
@@ -24,33 +24,28 @@ export default function Home(text: string) {
   const addButtonHandle = () => {
     const addTodo = [
       ...todos,
-      { id: todos.length + 1, todo: input, done: false },
+      { id: String(new Date()), todo: input, done: false },
     ];
     window.localStorage.setItem("myTodos", JSON.stringify(addTodo));
-    setTodos([...todos, { id: todos.length + 1, todo: input, done: false }]);
+    setTodos(addTodo);
     setInput("");
   };
 
   const removeTodo = () => {};
 
-  const deleteHandle = (e: any, param: number) => {
+  const deleteHandle = (e: any, param: string) => {
     console.log(param);
     const filtered = todos.filter((todo) => todo.id !== param);
-    window.localStorage.setItem(
-      "myTodos",
-      JSON.stringify([
-        ...todos,
-        { id: todos.length + 1, todo: input, done: false },
-      ])
-    );
+    window.localStorage.setItem("myTodos", JSON.stringify(filtered));
     setTodos(filtered);
   };
 
-  const doneHandle = (e: any, param: number) => {
+  const doneHandle = (e: any, param: string) => {
     const editTodos = todos.map((todo) =>
       todo.id === param ? { ...todo, done: !todo.done } : { ...todo }
     );
     setTodos(editTodos);
+    window.localStorage.setItem("myTodos", JSON.stringify(editTodos));
   };
 
   useEffect(() => {});
@@ -66,18 +61,18 @@ export default function Home(text: string) {
           type="text"
           value={input}
           placeholder="여기에 입력하세요"
-          className="text-black text-3xl p-2"
+          className="text-black text-3xl p-2 max-w-[15rem]"
           onChange={(e) => setInput(e.target.value)}
         />
 
-        <button
+        {/* <button
           className="border bg-white text-black m-2 p-2 rounded-lg"
           onClick={() => {
             setInput("");
           }}
         >
           클리어
-        </button>
+        </button> */}
       </div>
 
       <button
