@@ -22,14 +22,18 @@ export default function Home() {
   });
 
   const addButtonHandle = () => {
-    const addTodo = [
-      ...todos,
-      { id: String(new Date()), todo: input, done: false },
-    ];
+    console.log(input.replace(/\s/g, ""), length);
 
-    window.localStorage.setItem("myTodos", JSON.stringify(addTodo));
-    setTodos(addTodo);
-    setInput("");
+    if (input.replace(/\s/g, "") !== "") {
+      const addTodo = [
+        ...todos,
+        { id: String(new Date()), todo: input, done: false },
+      ];
+
+      window.localStorage.setItem("myTodos", JSON.stringify(addTodo));
+      setTodos(addTodo);
+      setInput("");
+    }
   };
 
   const removeTodo = () => {};
@@ -92,7 +96,8 @@ export default function Home() {
               <div
                 onClick={(e) => doneHandle(e, item.id)}
                 className={`border w-[25rem] m-4 p-2 ${
-                  !item.done && "text-red-400"
+                  (item.size && "text-[1rem]",
+                  item.done && "line-through opacity-50")
                 }`}
               >
                 {item.todo}
