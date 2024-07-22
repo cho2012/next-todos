@@ -6,6 +6,7 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: any) => {
@@ -15,6 +16,7 @@ export default function Register() {
         name,
         email,
         password,
+        photoUrl,
       });
       setMessage(response.data.message);
     } catch (error) {
@@ -43,6 +45,12 @@ export default function Register() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
+        />
+
+        <input
+          type="photoUrl"
+          value={photoUrl}
+          onChange={(e) => setPhotoUrl(e.target.value)}
         />
         <button type="submit">Register</button>
       </form>
