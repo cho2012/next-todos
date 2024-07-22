@@ -17,7 +17,7 @@ export default function Login() {
         password,
       });
       localStorage.setItem("token", response.data.token);
-      router.push("/todo");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }

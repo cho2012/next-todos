@@ -1,4 +1,5 @@
 "use client";
+import Header from "@/components/header";
 import { useEffect, useState } from "react";
 import { FaDeleteLeft } from "react-icons/fa6";
 
@@ -59,56 +60,64 @@ export default function Todo() {
   useEffect(() => {});
 
   return (
-    <div className="flex flex-col items-center">
-      <div className="mt-20">
-        {/* <Destructuring array={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} /> */}
-      </div>
-      <div className="title text-[5rem] font-extrabold mt-32">Todo</div>
-      <div className="border-red-500">
-        <input
-          type="text"
-          value={input}
-          placeholder="여기에 입력하세요"
-          className="text-black text-3xl p-2 max-w-[15rem]"
-          onChange={(e) => setInput(e.target.value)}
-        />
+    <div className="bg-white ">
+      <div className="bg-[url('./todo/image/bg.png')] w-screen h-screen bg-cover">
+        <div className=">mt-20">
+          {/* <Destructuring array={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} /> */}
+        </div>
+        <div className="flex justify-around">
+          <div className="justify-start mt-[400px] ">
+            <div className="text-[2rem]  bg-white inline-grid   ">
+              {todos?.map((item, index) => {
+                return (
+                  <div key={index} className="relative text-black  ">
+                    <div
+                      onClick={(e) => doneHandle(e, item.id)}
+                      className={`border-black w-[25rem] m-4   ${
+                        (item.size && "text-[1rem]",
+                        item.done && "line-through opacity-50")
+                      }`}
+                    >
+                      {item.todo}
+                    </div>
+                    <FaDeleteLeft
+                      onClick={(e) => deleteHandle(e, item.id)}
+                      className="absolute left-[22rem]  top-6"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
-        {/* <button
+          {/* <button
           className="border bg-white text-black m-2 p-2 rounded-lg"
           onClick={() => {
             setInput("");
-          }}
-        >
-          클리어
-        </button> */}
-      </div>
-
-      <button
-        className="border bg-white text-black m-2 p-2 rounded-lg"
-        onClick={addButtonHandle}
-      >
-        할일 추가
-      </button>
-      <div className="text-[2rem]">
-        {todos?.map((item, index) => {
-          return (
-            <div key={index} className="relative">
-              <div
-                onClick={(e) => doneHandle(e, item.id)}
-                className={`border w-[25rem] m-4 p-2 ${
-                  (item.size && "text-[1rem]",
-                  item.done && "line-through opacity-50")
-                }`}
-              >
-                {item.todo}
+            }}
+            >
+            클리어
+            </button> */}
+          <div className="justify-end">
+            <div className="inline text-center">
+              <div className=" text-[15rem] font-extrabold pt-32  text-black">
+                Todo
               </div>
-              <FaDeleteLeft
-                onClick={(e) => deleteHandle(e, item.id)}
-                className="absolute right-8 top-4"
-              />
+              <div className="border-red-500">
+                <div className=" ">
+                  <input
+                    type="text"
+                    value={input}
+                    placeholder="여기에 입력하세요"
+                    className="   text-[2rem] text-center  text-black "
+                    onChange={(e) => setInput(e.target.value)}
+                    onClick={addButtonHandle}
+                  />
+                </div>
+              </div>
             </div>
-          );
-        })}
+          </div>
+        </div>
       </div>
     </div>
   );
